@@ -1,0 +1,69 @@
+--allman false
+--assetliterals visual-width
+--beforemarks typealias
+--binarygrouping 4,8
+--categorymark "MARK: %c"
+--classthreshold 0
+--closingparen balanced
+--commas always
+--conflictmarkers reject
+--decimalgrouping 3,6
+--elseposition same-line
+--emptybraces linebreak
+--enumthreshold 0
+--exponentcase lowercase
+--exponentgrouping disabled
+--extensionacl on-extension
+--extensionlength 0
+--extensionmark "MARK: - %t + %c"
+--fractiongrouping disabled
+--fragment false
+--funcattributes same-line
+--groupedextension "MARK: %c"
+--guardelse auto
+--header strip
+--hexgrouping 4,8
+--hexliteralcase uppercase
+--ifdef no-indent
+--importgrouping testable-last
+--indent 4
+--indentcase false
+--lifecycle 
+--linebreaks lf
+--markextensions always
+--marktypes always
+--maxwidth 120
+--modifierorder override,acl,setterACL,dynamic,mutators,lazy,final,required,convenience,typeMethods,owned
+--nevertrailing 
+--nospaceoperators 
+--nowrapoperators 
+--octalgrouping 4,8
+--operatorfunc no-space
+--organizetypes actor,class,enum,struct
+--patternlet hoist
+--ranges no-space
+--redundanttype inferred
+--self insert
+--selfrequired 
+--semicolons never
+--shortoptionals always
+--smarttabs enabled
+--stripunusedargs closure-only
+--structthreshold 0
+--swiftversion 5.3
+--tabwidth 4
+--trailingclosures 
+--trimwhitespace always
+--typeattributes preserve
+--typemark "MARK: - %t"
+--varattributes same-line
+--voidtype void
+--wraparguments default
+--wrapcollections default
+--wrapconditions default
+--wrapparameters default
+--wrapreturntype preserve
+--xcodeindentation enabled
+--yodaswap always
+--disable wrapMultilineStatementBraces
+--enable isEmpty,markTypes,organizeDeclarations,sortedSwitchCases,wrapEnumCases

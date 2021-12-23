@@ -1,0 +1,54 @@
+name: "Swift Package"
+
+on:
+  push:
+    branches:
+      - "master"
+      - "releas/**"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  test_swift_lastest:
+    name: Tests
+    runs-on: "macos-11"
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Switch Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "13.2" # Swift 5.5.2
+      - name: Build
+        run: "swift build -c release -v"
+      - name: Run Tests
+        run: "swift test -v"
+  test_swift_5_5:
+    name: "Tests (Swift 5.5)"
+    runs-on: "macos-11"
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Switch Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "13.0" # Swift 5.5
+      - name: Build
+        run: "swift build -c release -v"
+      - name: Run Tests
+        run: "swift test -v"
+  test_swift_5_4:
+    name: "Tests (Swift 5.4)"
+    runs-on: "macos-11"
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Switch Xcode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "12.5.1" # Swift 5.4
+      - name: Build
+        run: "swift build -c release -v"
+      - name: Run Tests
+        run: "swift test -v"
