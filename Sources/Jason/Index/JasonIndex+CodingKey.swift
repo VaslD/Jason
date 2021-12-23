@@ -25,14 +25,16 @@ extension JasonIndex: CodingKey {
 
     /// 通过整数构造 ``element(_:)``。
     ///
-    /// - Parameter intValue: 整数索引
+    /// - Parameter intValue: 整数索引。
+    @inlinable
     public init(intValue: Int) {
         self = .element(intValue)
     }
 
     /// 通过字符串构造 ``property(_:)``。
     ///
-    /// - Parameter stringValue: 文本索引
+    /// - Parameter stringValue: 文本索引。
+    @inlinable
     public init(stringValue: String) {
         self = .property(stringValue)
     }

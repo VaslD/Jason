@@ -8,8 +8,7 @@ public extension Jason {
     /// 当原始 JSON 为 `true`, `false` 以及它们的文本形式、或者为任何形式的 `0` 和 `1` 时转换都会成功；而数组、字典（对象）和
     /// `null` 都会导致失败。
     ///
-    /// > Warning:
-    /// 此方法不能用于检查原始 JSON 是否只为 `true` 或 `false`，对应检查请使用 ``rawValue``。
+    /// > Warning: 此方法不能用于检查原始 JSON 是否只为 `true` 或 `false`，对应检查请使用 ``rawValue``。
     ///
     /// - Returns: 成功转换的 `Bool` 或 `nil`。
     func asBool() -> Bool? {
@@ -54,8 +53,7 @@ public extension Jason {
     ///
     /// 当原始 JSON 为 `true`, `false` 或者为字符串、数字时转换都会成功；而数组、字典（对象）和 `null` 都会导致失败。
     ///
-    /// > Warning:
-    /// 此方法不能用于检查原始 JSON 是否只为 `String`，对应检查请使用 ``rawValue``。
+    /// > Warning: 此方法不能用于检查原始 JSON 是否只为 `String`，对应检查请使用 ``rawValue``。
     ///
     /// - Returns: 成功转换的 `String` 或 `nil`。
     func asString() -> String? {
@@ -138,7 +136,7 @@ public extension Jason {
     ///
     /// > Warning:
     /// 此方法不能用于检查原始 JSON 是否只为 `Double`。JSON 标准并不区分 `Int`, `UInt` 和 `Double`，因此 JSON
-    /// 无法完全还原来源的数值类型；有关 ``Jason`` 如何决定数值的 Swift 类型，请阅读 ``integer(_:)``, ``unsigned(_:)``,
+    /// 无法完全还原来源的数值类型；有关 ``Jason/Jason`` 如何决定数值的 Swift 类型，请阅读 ``integer(_:)``, ``unsigned(_:)``,
     /// ``float(_:)`` 枚举成员的文档。
     ///
     /// - Returns: 成功转换的 `Double` 或 `nil`。
@@ -167,13 +165,12 @@ public extension Jason {
     /// ``asInt()``, ``asUInt()``, ``asDouble()`` 方法，因为这些方法包含针对基本类型的特殊处理。
     ///
     /// - Parameters:
-    ///   - type: 遵循 `Decodable` 的类型
-    ///   - encoder: 编码此 JSON 使用的 `JSONEncoder`
-    ///   - decoder: 解码为 `Decodable` 时使用的 `JSONDecoder`
-    /// - Returns: 解码后的实例
-    func `as`<T: Decodable>(_ type: T.Type, encoder: JSONEncoder = JSONEncoder(),
-                            decoder: JSONDecoder = JSONDecoder()) throws -> T {
-        let data = try encoder.encode(self)
+    ///   - type: 遵循 `Decodable` 的类型。
+    ///   - encoder: 编码此 JSON 使用的 `JSONEncoder`。
+    ///   - decoder: 解码为 `Decodable` 时使用的 `JSONDecoder`。
+    /// - Returns: 解码后的实例。
+    func `as`<T: Decodable>(_ type: T.Type, decoder: JSONDecoder = JSONDecoder()) throws -> T {
+        let data = try self.serialize()
         return try decoder.decode(type, from: data)
     }
 #endif
@@ -181,8 +178,8 @@ public extension Jason {
     /// 使用此 JSON 构造任意类型 `T` 的实例。
     ///
     /// - Parameters:
-    ///   - transform: 构造方法
-    /// - Returns: 构造的实例
+    ///   - transform: 使用的构造回调。
+    /// - Returns: 构造的实例。
     func `as`<T>(_ transform: (Jason) throws -> T) rethrows -> T {
         try transform(self)
     }

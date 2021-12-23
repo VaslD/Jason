@@ -1,7 +1,7 @@
 extension Jason: CustomDebugStringConvertible {
-    /// 序列化此 ``Jason`` 实例为文本形式的 JSON。
+    /// 序列化此 ``Jason/Jason`` 实例为文本形式的 JSON。
     ///
-    /// 此方法仅用于调试输出，请使用 JSON 序列化框架将 ``Jason`` 转换为 JSON 数据。
+    /// 此方法仅用于调试输出，请使用 JSON 序列化框架将 ``Jason/Jason`` 转换为 JSON 数据。
     ///
     /// > Note: 在 DEBUG 编译配置下，此方法输出经过键排序和缩进格式化的 JSON。
     public var debugDescription: String {

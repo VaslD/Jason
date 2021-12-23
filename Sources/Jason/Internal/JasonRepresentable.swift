@@ -18,7 +18,8 @@ protocol JasonRepresentable {
 // MARK: - Jason + JasonRepresentable
 
 extension Jason: JasonRepresentable {
-    public func toJason() -> Jason {
+    @inlinable
+    func toJason() -> Jason {
         self
     }
 }
@@ -40,6 +41,7 @@ extension Optional: JasonRepresentable where Wrapped: JasonRepresentable {
 
 #if canImport(Foundation)
 extension NSNull: JasonRepresentable {
+    @inlinable
     func toJason() -> Jason {
         .empty
     }
@@ -49,6 +51,7 @@ extension NSNull: JasonRepresentable {
 // MARK: - Bool + JasonRepresentable
 
 extension Bool: JasonRepresentable {
+    @inlinable
     func toJason() -> Jason {
         .boolean(self)
     }
@@ -58,6 +61,7 @@ extension Bool: JasonRepresentable {
 
 #if canImport(ObjectiveC)
 extension ObjCBool: JasonRepresentable {
+    @inlinable
     func toJason() -> Jason {
         .boolean(self.boolValue)
     }
@@ -67,6 +71,7 @@ extension ObjCBool: JasonRepresentable {
 // MARK: - StringProtocol + JasonRepresentable
 
 public extension StringProtocol {
+    @inlinable
     func toJason() -> Jason {
         .string(String(self))
     }
@@ -84,6 +89,7 @@ extension Substring: JasonRepresentable {}
 
 #if canImport(Foundation)
 extension NSString: JasonRepresentable {
+    @inlinable
     func toJason() -> Jason {
         .string(self as String)
     }
@@ -93,6 +99,7 @@ extension NSString: JasonRepresentable {
 // MARK: - SignedInteger + JasonRepresentable
 
 extension SignedInteger {
+    @inlinable
     func toJason() -> Jason {
         .integer(Int(self))
     }
@@ -121,6 +128,7 @@ extension Int64: JasonRepresentable {}
 // MARK: - UnsignedInteger + JasonRepresentable
 
 extension UnsignedInteger {
+    @inlinable
     func toJason() -> Jason {
         .unsigned(UInt(self))
     }
@@ -149,6 +157,7 @@ extension UInt64: JasonRepresentable {}
 // MARK: - BinaryFloatingPoint + JasonRepresentable
 
 extension BinaryFloatingPoint {
+    @inlinable
     func toJason() -> Jason {
         .float(Double(self))
     }

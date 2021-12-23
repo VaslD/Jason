@@ -88,7 +88,7 @@ public extension Jason {
     /// - Parameters:
     ///   - body: 任意闭包。
     ///   - index: 当前元素索引，请阅读 ``JasonIndex`` 文档。
-    ///   - value: 当前的 ``Jason/Jason`` 元素。
+    ///   - value: 当前 ``Jason/Jason`` 元素。
     func forEach(_ body: (_ index: JasonIndex, _ value: Jason) throws -> Void) rethrows {
         switch self {
         case let .array(array):

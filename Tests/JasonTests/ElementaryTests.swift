@@ -34,7 +34,7 @@ class JSONTests: XCTestCase {
         let x: Jason = true
         let y: Jason = false
         XCTAssert(x == true)
-        XCTAssert(x == Bool???(true))
+        XCTAssert(x == Bool???(true) as Any?)
         XCTAssert(y == false)
         XCTAssertNotEqual(x, y)
         XCTAssert(x != 1)
@@ -54,10 +54,10 @@ class JSONTests: XCTestCase {
 
     func testJSONNumber() {
         let a: Jason = 0
-        let b: Jason = 2_147_483_647
+        let b: Jason = 2147483647
         XCTAssert(a == 0)
         XCTAssert(a != nil)
-        XCTAssert(b == 2_147_483_647)
+        XCTAssert(b == 2147483647)
 
         let c: Jason = 0.0
         let d: Jason = 0.30000000000000004
@@ -66,9 +66,9 @@ class JSONTests: XCTestCase {
         XCTAssert(d == 0.30000000000000003)
 
 #if arch(arm) || arch(i386) || arch(arm64_32)
-        let e: Jason = .unsigned(4_294_967_295)
+        let e: Jason = .unsigned(4294967295)
 #else
-        let e: Jason = .unsigned(18_446_744_073_709_551_615)
+        let e: Jason = .unsigned(18446744073709551615)
 #endif
         let f = Jason.unsigned(0)
         XCTAssert(e == .unsigned(UInt.max))
@@ -96,7 +96,7 @@ class JSONTests: XCTestCase {
             "B": 2,
             "Cc": false,
             "d": ["D"],
-            "é": nil,
+            "é": nil
         ]
         XCTAssert(x == [:])
         XCTAssert(x != [])
@@ -105,7 +105,7 @@ class JSONTests: XCTestCase {
             "B": 2.0,
             "Cc": false,
             "d": ["D"],
-            "é": .empty,
+            "é": .empty
         ])
     }
 
@@ -122,7 +122,7 @@ class JSONTests: XCTestCase {
         let dictionary = [
             "array": array,
             "JSON": x!,
-            "nothing": String?.none as Any,
+            "nothing": String?.none as Any
         ] as [String: Any]
         let y = Jason(rawValue: dictionary)
         XCTAssertNotNil(y)
@@ -138,12 +138,15 @@ class JSONTests: XCTestCase {
     }
 
     func testJSONSubscript() throws {
+        XCTAssert(JasonIndex.property("123") == "123")
+        XCTAssert(JasonIndex.element(1) == 1)
+
         var x: Jason = [3.14, "pi"]
         XCTAssert(x[.invalid] == nil)
         XCTAssert(x[0] == 3.14)
         XCTAssert(x[0].rawValue as? Double == 3.14)
         XCTAssert(x[1][2] == nil)
-        XCTAssert(x[1, 2] == .empty)
+        XCTAssert(x[1][2] == .empty)
         x[0] = 3.1415
         XCTAssert(x[0] == 3.1415)
         x[5] = "No Data Loss"
@@ -161,18 +164,14 @@ class JSONTests: XCTestCase {
         XCTAssert(copy == x)
         x[Int.min] = "~"
         XCTAssert(copy == x)
-        x[Int?.none] = "~"
-        XCTAssert(copy == x)
-        x[String?.none] = "~"
-        XCTAssert(copy == x)
 
         var y: Jason = [
-            "pi": 3.14,
+            "pi": 3.14
         ]
         XCTAssert(y["pi"] == 3.14)
         XCTAssert(y["pi"].rawValue as? Double == 3.14)
         XCTAssert(y["Pi"]["value"] == nil)
-        XCTAssert(y["Pi", "value"] == .empty)
+        XCTAssert(y["Pi"]["value"] == .empty)
         y["e"] = 2.71828
         XCTAssert(y["e"] == 2.71828)
         y[0] = "Data Loss"
@@ -182,18 +181,13 @@ class JSONTests: XCTestCase {
         y["keyA"]["keyB"] = 15
         XCTAssert(y["keyA"] != nil)
         XCTAssert(y["keyA"].rawValue is [String: Any])
-        XCTAssert(y["keyA", "keyB"] == 15)
+        XCTAssert(y["keyA"]["keyB"] == 15)
 
         x[15]["key"][2] = y
         XCTAssert(x.count == 16)
         XCTAssertFalse(x[15].isEmpty)
         XCTAssert(x[15]["key"].rawValue is [Any])
-        XCTAssert(x[15]["key", 2, "keyA"]["keyB"] == 15)
-
-        let int: Int? = nil
-        let string: String? = nil
-        XCTAssert(x[int] == nil)
-        XCTAssert(y[string] == nil)
+        XCTAssert(x[15]["key"][2]["keyA"]["keyB"] == 15)
     }
 
     func testJSON() throws {
@@ -207,7 +201,7 @@ class JSONTests: XCTestCase {
             "EU",
             "NA",
             "OC",
-            "SA",
+            "SA"
         ]) == Set((model["continents"].rawValue as! [String: Any]).keys))
 
         let worldState = Bundle.module.url(forResource: "WorldState", withExtension: "json")!
@@ -291,8 +285,8 @@ class JSONTests: XCTestCase {
                 3,
                 4.0,
                 UInt.max,
-                true,
-            ],
+                true
+            ]
         ], options: [])
         let json: Jason = [
             "A": [
@@ -301,8 +295,8 @@ class JSONTests: XCTestCase {
                 3,
                 4.0,
                 Jason(rawValue: UInt.max)!,
-                .boolean(true),
-            ],
+                .boolean(true)
+            ]
         ]
         let data = try Encoder().encode(json)
         XCTAssertEqual(encoded, data)
@@ -321,8 +315,8 @@ class JSONTests: XCTestCase {
                 2,
                 3,
                 4,
-                5,
-            ],
+                5
+            ]
         ]
         XCTAssert(object["no_value"] == nil)
         XCTAssert((object["four_elements"].rawValue as! [Any]).count == 6)

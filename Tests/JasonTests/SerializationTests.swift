@@ -1,7 +1,6 @@
 import Foundation
-import XCTest
-
 @testable import Jason
+import XCTest
 
 class SerializationTests: XCTestCase {
     func testNullDecoding() throws {
@@ -76,7 +75,7 @@ class SerializationTests: XCTestCase {
             .string("JasonDeserializationTests"),
             .boolean(true),
             .integer(Int.min),
-            .unsigned(UInt.max)
+            .unsigned(UInt.max),
         ])
 
         let data = try JSONEncoder().encode(original)
@@ -99,7 +98,7 @@ class SerializationTests: XCTestCase {
         var value: Jason = nil
         value["params"] = try .serialized([
             "keys": "someKey",
-            "category": ["my category"]
+            "category": ["my category"],
         ])
 
         value["params"] = try .serialized("ABC")
@@ -108,5 +107,17 @@ class SerializationTests: XCTestCase {
         value["params"] = try .serialized("ABC", serializeStringAsIs: true)
         let y = try value.serialize()
         XCTAssert(x != y)
+    }
+
+    func testDeserializationJSON() throws {
+        guard let symbols = Bundle.module.url(forResource: "Jason Symbols", withExtension: "json"),
+              let rows = Bundle.module.url(forResource: "All Rows", withExtension: "json") else {
+            return
+        }
+        var data = try Data(contentsOf: symbols, options: .mappedIfSafe)
+        _ = try Jason.deserialize(data)
+
+        data = try Data(contentsOf: rows, options: .mappedIfSafe)
+        _ = try Jason.deserialize(data)
     }
 }

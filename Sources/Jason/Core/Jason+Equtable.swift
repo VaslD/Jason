@@ -1,15 +1,16 @@
 public extension Jason {
-    /// ``Jason`` 相等性比较。
+    /// ``Jason/Jason`` 相等性比较。
     ///
     /// 此方法实现工作原理如下：
+    /// 
     /// - ``empty`` 只与 ``empty`` 相等。
     /// - ``boolean(_:)``, ``string(_:)``, ``array(_:)``, ``dictionary(_:)`` 只可能与相同类型相等，相等性遵循类型默认实现。
-    /// - ``integer(_:)`` 与 ``float(_:)`` 将进行忽略类型的数学相等性比较。
+    /// - ``integer(_:)``, ``unsigned(_:)``, ``float(_:)`` 之间将进行忽略类型的数学相等性比较。
     ///
     /// - Parameters:
-    ///   - lhs: 等号左侧的 ``Jason``
-    ///   - rhs: 等号右侧的 ``Jason``
-    /// - Returns: 是否相等
+    ///   - lhs: 等号左侧的 ``Jason/Jason``。
+    ///   - rhs: 等号右侧的 ``Jason/Jason``。
+    /// - Returns: 两者是否相等。
     static func ==(lhs: Self, rhs: Self) -> Bool {
         switch lhs {
         case .empty:
@@ -70,15 +71,15 @@ public extension Jason {
         }
     }
 
-    /// 与任意类型进行相等性比较。类型实例将先被尝试转换为 ``Jason``。
+    /// 与任意类型进行相等性比较。类型实例将先被尝试转换为 ``Jason/Jason``。
     ///
-    /// 有关任意实例如何被转换为 ``Jason``，请阅读 ``rawValue`` 的文档。
+    /// 有关任意实例如何被转换为 ``Jason/Jason``，请阅读 ``init(rawValue:)-9xl31`` 的文档。
     ///
     /// - Parameters:
-    ///   - lhs: 等号左侧的 ``Jason``
-    ///   - rhs: 等号右侧的任意类型实例
-    /// - Returns: 是否相等
-    static func == <T>(lhs: Self, rhs: T?) -> Bool {
+    ///   - lhs: 等号左侧的 ``Jason/Jason``。
+    ///   - rhs: 等号右侧的任意类型实例。
+    /// - Returns: 两者是否相等。
+    static func ==(lhs: Self, rhs: Any?) -> Bool {
         if case .empty = lhs, case .none = rhs {
             return true
         }

@@ -6,8 +6,8 @@ import Foundation
 public extension JSONDecoder {
     /// 将 JSON 数据模型化并交由调用者手动处理。
     ///
-    /// - Parameter data: 原始 JSON 数据
-    /// - Returns: JSON 对应的 ``Jason`` 模型
+    /// - Parameter data: 原始 JSON 数据。
+    /// - Returns: JSON 对应的 ``Jason/Jason`` 模型。
     func decodeJason(from data: Data) throws -> Jason {
         try self.decode(Jason.self, from: data)
     }
@@ -15,11 +15,11 @@ public extension JSONDecoder {
     /// 通过 ``JasonIndex`` 解析嵌套的 `Decodable`。
     ///
     /// - Parameters:
-    ///   - type: 遵循 `Decodable` 的类型
-    ///   - data: JSON 数据
-    ///   - path: 嵌套的类型所在位置
+    ///   - type: 遵循 `Decodable` 的类型。
+    ///   - data: JSON 数据。
+    ///   - path: 嵌套的类型所在位置。
     ///
-    /// - Returns: 剥离嵌套的 `Decodable` 实例
+    /// - Returns: 剥离嵌套的 `Decodable` 实例。
     func decode<T: Decodable>(_ type: T.Type, from data: Data, path: [JasonIndex]) throws -> T {
         if path.isEmpty {
             return try self.decode(type, from: data)

@@ -58,3 +58,7 @@ Package.resolved
 # CocoaPods
 Pods/
 Podfile.lock
+
+# Large Test Data Set
+Tests/JasonTests/Resources/All Rows.json
+Tests/JasonTests/Resources/Jason Symbols.json
