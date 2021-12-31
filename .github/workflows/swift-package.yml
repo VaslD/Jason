@@ -3,11 +3,11 @@ name: "Swift Package"
 on:
   push:
     branches:
-      - "master"
+      - "main"
       - "releas/**"
   pull_request:
     branches:
-      - "master"
+      - "main"
 
 jobs:
   test_swift_lastest:

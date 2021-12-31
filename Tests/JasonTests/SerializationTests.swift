@@ -3,7 +3,7 @@ import XCTest
 
 @testable import Jason
 
-class DeserializationTests: XCTestCase {
+class SerializationTests: XCTestCase {
     func testNullDecoding() throws {
         let original = Jason.empty
 
@@ -93,5 +93,20 @@ class DeserializationTests: XCTestCase {
         let deserialized = try Jason.deserialize(data)
         let decoded = try JSONDecoder().decodeJason(from: data)
         XCTAssertEqual(deserialized, decoded)
+    }
+
+    func testSerializedJason() throws {
+        var value: Jason = nil
+        value["params"] = try Jason.serialized([
+            "keys": "someKey",
+            "category": ["my category"]
+        ])
+
+        value["params"] = try Jason.serialized("ABC")
+        let x = try value.serialize()
+
+        value["params"] = try Jason.serialized("ABC", serializeStringAsIs: true)
+        let y = try value.serialize()
+        XCTAssert(x != y)
     }
 }
