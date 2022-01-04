@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "Jason"
-  spec.version = "2.2.1"
+  spec.version = "2.4.0"
 
   spec.summary = "Jason 是 JSON 基本类型的枚举。"
   spec.description = "Jason 是 JSON 基本类型的枚举。"

@@ -97,15 +97,15 @@ class SerializationTests: XCTestCase {
 
     func testSerializedJason() throws {
         var value: Jason = nil
-        value["params"] = try Jason.serialized([
+        value["params"] = try .serialized([
             "keys": "someKey",
             "category": ["my category"]
         ])
 
-        value["params"] = try Jason.serialized("ABC")
+        value["params"] = try .serialized("ABC")
         let x = try value.serialize()
 
-        value["params"] = try Jason.serialized("ABC", serializeStringAsIs: true)
+        value["params"] = try .serialized("ABC", serializeStringAsIs: true)
         let y = try value.serialize()
         XCTAssert(x != y)
     }
