@@ -1,7 +1,8 @@
 #if canImport(Foundation)
-
 import Foundation
+#endif
 
+#if canImport(Foundation)
 public extension Jason {
     /// 序列化 ``Jason`` 为 JSON 数据。
     ///
@@ -102,5 +103,4 @@ public extension Jason {
         return try Self.deserialize(data)
     }
 }
-
 #endif

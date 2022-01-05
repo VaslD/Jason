@@ -1,5 +1,8 @@
+#if canImport(Foundation)
 import Foundation
+#endif
 
+#if canImport(Foundation)
 public extension JSONSerialization {
     /// 检查输入是否合法 JSON。此方法返回 `true` 时，序列化必须指定 `JSONSerialization.WritingOptions.fragmentsAllowed`。
     ///
@@ -29,3 +32,4 @@ public extension JSONSerialization {
         }
     }
 }
+#endif
