@@ -4,40 +4,26 @@ import XCTest
 @testable import Jason
 
 class DecoderTests: XCTestCase {
-    func testPathDecoding() throws {
-        let decoder = JSONDecoder()
+    func testStandardTypes() throws {
+        let simple = Bundle.module.url(forResource: "Simple", withExtension: "json")!
+        let data = try Data(contentsOf: simple)
+        let model = try JasonDecoder().decode(Standard.self, from: data)
 
-        let squad = Bundle.module.url(forResource: "Squad", withExtension: "json")!
-        var data = try! Data(contentsOf: squad)
-        XCTAssertNoThrow(try decoder.decode([Superhero].self, from: data, path: ["members"]))
-        XCTAssertEqual(try decoder.decode(Int.self, from: data, path: ["formed"]), 2016)
-        XCTAssertEqual(try decoder.decode(Superhero.self, from: data, path: ["members", 2]).secretIdentity, "Unknown")
-        XCTAssertEqual(try decoder.decode(Superhero?.self, from: data, path: ["unknown", 1]), nil)
-        XCTAssertEqual(try decoder.decode(Superhero?.self, from: data, path: [0, 2]), nil)
-        XCTAssertEqual(try decoder.decode(Date?.self, from: data, path: ["leader", 0]), nil)
-        XCTAssertEqual(try decoder.decode(Date?.self, from: data, path: ["leader", "powers"]), nil)
-        XCTAssertEqual(try decoder.decode(Superhero?.self, from: data, path: ["members", 0, "John", "age"]), nil)
-        XCTAssertEqual(try decoder.decode(Superhero?.self, from: data, path: ["members", 42, "age"])?.age, nil)
-        XCTAssertEqual(try decoder.decode(Int?.self, from: data, path: ["members", "1", "age"]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: ["members", 0, 1, "name"]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: ["members", 3, "name"]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: ["members", "x"]), nil)
-        XCTAssertThrowsError(try decoder.decode(Superhero?.self, from: data, path: ["members", 0, "age"]))
-        XCTAssertThrowsError(try decoder.decode(Superhero?.self, from: data, path: ["squadName"]))
-        XCTAssertThrowsError(try decoder.decode(Superhero.self, from: data, path: [""]))
-        XCTAssertThrowsError(try decoder.decode(Superhero.self, from: data, path: [.invalid]))
-        XCTAssertThrowsError(try decoder.decode(Superhero.self, from: data, path: [-100]))
-
-        let powers = Bundle.module.url(forResource: "Powers", withExtension: "json")!
-        data = try! Data(contentsOf: powers)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [JasonIndex.property("1")]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [1, "power"]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [0, 1, 2]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [0, 7, 2]), nil)
-
-        data = "[\"A\",\"B\"]".data(using: .utf8)!
-        XCTAssertNoThrow(try decoder.decode([String].self, from: data, path: []))
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [2]), nil)
-        XCTAssertEqual(try decoder.decode(String?.self, from: data, path: [3]), nil)
+        XCTAssertEqual(model.null, nil)
+        XCTAssertEqual(model.bool, true)
+        XCTAssertEqual(model.string, "Abç")
+        XCTAssertEqual(model.int, Int(Int32.max))
+        XCTAssertEqual(model.uint, UInt(UInt32.max))
+        XCTAssertEqual(model.float, 1 / 2)
+        XCTAssertEqual(model.double, 79228162514264337593543950336)
+        XCTAssertEqual(model.int8, Int8.max)
+        XCTAssertEqual(model.int16, Int16.max)
+        XCTAssertEqual(model.int32, Int32.max)
+        XCTAssertEqual(model.int64, Int64.max)
+        XCTAssertEqual(model.uint8, UInt8.max)
+        XCTAssertEqual(model.uint16, UInt16.max)
+        XCTAssertEqual(model.uint32, UInt32.max)
+        XCTAssertEqual(model.uint64, UInt64.max)
+        XCTAssertEqual(model.array[0], model.array[1])
     }
 }

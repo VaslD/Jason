@@ -17,7 +17,7 @@ public extension Jason {
         guard JSONSerialization.isValidJSONFragment(raw) else {
             throw EncodingError.invalidValue(self, EncodingError.Context(
                 codingPath: [],
-                debugDescription: "Jason 似乎包含非法 JSON 元素。请将此问题反馈到 Yi Ding (yi.ding.o@nio.com)。",
+                debugDescription: "Jason 似乎包含非法 JSON 元素。请将此问题反馈到 Yi Ding (yi.ding5@nio.com)。",
                 underlyingError: nil
             ))
         }
@@ -54,7 +54,7 @@ public extension Jason {
         guard JSONSerialization.isValidJSONFragment(raw) else {
             throw EncodingError.invalidValue(self, EncodingError.Context(
                 codingPath: [],
-                debugDescription: "Jason 似乎包含非法 JSON 元素。请将此问题反馈到 Yi Ding (yi.ding.o@nio.com)。",
+                debugDescription: "Jason 似乎包含非法 JSON 元素。请将此问题反馈到 Yi Ding (yi.ding5@nio.com)。",
                 underlyingError: nil
             ))
         }
@@ -70,7 +70,7 @@ public extension Jason {
         guard let string = String(data: data, encoding: .utf8) else {
             throw EncodingError.invalidValue(self, EncodingError.Context(
                 codingPath: [],
-                debugDescription: "JSONSerialization 输出 JSON 似乎无效。请将此问题反馈到 Yi Ding (yi.ding.o@nio.com)。",
+                debugDescription: "JSONSerialization 输出 JSON 似乎无效。请将此问题反馈到 Yi Ding (yi.ding5@nio.com)。",
                 underlyingError: nil
             ))
         }
@@ -101,7 +101,7 @@ public extension Jason {
         guard let result = Jason(rawValue: object) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: [],
-                debugDescription: "JSONSerialization 解析时生成了未知对象。请将此问题反馈到 Yi Ding (yi.ding.o@nio.com)。",
+                debugDescription: "JSONSerialization 解析时生成了未知对象。请将此问题反馈到 Yi Ding (yi.ding5@nio.com)。",
                 underlyingError: nil
             ))
         }
@@ -122,7 +122,7 @@ public extension Jason {
         guard let data = string.data(using: .utf8) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(
                 codingPath: [],
-                debugDescription: "Swift.String 似乎没有 UTF-8 表示形式。请将此问题反馈到 Yi Ding (yi.ding.o@nio.com)。",
+                debugDescription: "Swift.String 似乎没有 UTF-8 表示形式。请将此问题反馈到 Yi Ding (yi.ding5@nio.com)。",
                 underlyingError: nil
             ))
         }
