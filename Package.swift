@@ -12,9 +12,6 @@ let package = Package(
         .watchOS(.v2),
     ],
     products: [
-        // Enables "JSON" type-alias for Jason.
-        .library(name: "JSON", targets: ["JSON"]),
-
         // Standard Jason module.
         .library(name: "Jason", targets: ["Jason"]),
     ],
@@ -22,7 +19,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "Jason"),
-        .target(name: "JSON", dependencies: ["Jason"]),
 
         // Unit Tests
         .testTarget(name: "JasonTests", dependencies: [
