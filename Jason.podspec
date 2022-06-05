@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.summary = "Jason 是 JSON 基本类型的枚举。"
   spec.description = "Jason 是 JSON 基本类型的枚举。"
   spec.homepage = "https://github.com/VaslD/Jason"
-  spec.author = { "Yi Ding" => "yi.ding.o@nio.com" }
+  spec.author = { "Yi Ding" => "yi.ding5@nio.com" }
   spec.license = { :type => "MIT" }
 
   spec.ios.deployment_target = "9.0"
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.tvos.deployment_target = "9.0"
   spec.watchos.deployment_target = "2.0"
 
-  spec.swift_version = "5.4"
+  spec.swift_version = "5.5"
 
   spec.source = { :git => "https://github.com/VaslD/Jason.git", :tag => "v#{spec.version}" }
 
