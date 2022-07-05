@@ -160,6 +160,13 @@ public extension Jason {
     }
 
 #if canImport(Foundation)
+    /// 尝试将此 JSON 转换为 `Decimal` 类型。
+    ///
+    /// 此方法与 ``asDouble()`` 转换规则相同但返回 `Decimal` 类型，从而获得 `Decimal` 的精度特性。
+    func asDecimal() -> Decimal? {
+        self.asDouble().flatMap { Decimal($0) }
+    }
+    
     /// 将此 JSON 转换为 `Decodable` 类型。
     ///
     /// > Important:

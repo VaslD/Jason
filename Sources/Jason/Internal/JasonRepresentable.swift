@@ -181,6 +181,16 @@ extension Float80: JasonRepresentable {}
 extension CGFloat: JasonRepresentable {}
 #endif
 
+// MARK: - Decimal + JasonRepresentable
+
+#if canImport(Foundation)
+extension Decimal: JasonRepresentable {
+    func toJason() -> Jason {
+        .float((self as NSNumber).doubleValue)
+    }
+}
+#endif
+
 // MARK: - Dictionary + JasonRepresentable
 
 extension Dictionary: JasonRepresentable where Key: CustomStringConvertible, Value: JasonRepresentable {

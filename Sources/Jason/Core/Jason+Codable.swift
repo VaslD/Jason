@@ -1,3 +1,7 @@
+#if canImport(Foundation)
+import Foundation
+#endif
+
 // MARK: - Jason + Encodable
 
 extension Jason: Encodable {
@@ -37,7 +41,11 @@ extension Jason: Encodable {
 
         case let .float(value):
             var container = encoder.singleValueContainer()
+#if canImport(Foundation)
+            try container.encode(Decimal(value))
+#else
             try container.encode(value)
+#endif
 
         case let .array(value):
             let nullNotAllowed = encoder.userInfo[CodingUserInfoKey.Jason.skipNullValues] as? Bool == true

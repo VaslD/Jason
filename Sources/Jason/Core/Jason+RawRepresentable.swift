@@ -2,6 +2,10 @@
 import CoreFoundation
 #endif
 
+#if canImport(Foundation)
+import Foundation
+#endif
+
 // MARK: - Jason + RawRepresentable
 
 extension Jason: RawRepresentable {
@@ -125,7 +129,11 @@ extension Jason: RawRepresentable {
         case let .unsigned(value):
             return value
         case let .float(value):
+#if canImport(Foundation)
+            return Decimal(value) as NSNumber
+#else
             return value
+#endif
         case let .array(value):
             return value.map(\.rawValue)
         case let .dictionary(value):
